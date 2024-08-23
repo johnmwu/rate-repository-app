@@ -18,6 +18,14 @@ const theme = {
   },
   fonts: {
     main: "System",
+
+    // platform specific fonts
+    ios: {
+      main: "Arial",
+    },
+    android: {
+      main: "Roboto",
+    },
   },
   fontWeights: {
     normal: "400",

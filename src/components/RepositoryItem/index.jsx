@@ -1,4 +1,5 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
+import Text from "../../components/Text";
 import theme from "../../theme";
 import ItemStat from "./ItemStat";
 
