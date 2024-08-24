@@ -2,6 +2,7 @@ import { View, TextInput, StyleSheet, Pressable } from "react-native";
 import { useFormik } from "formik";
 import theme from "../theme";
 import Text from "./Text";
+import useSignIn from "../hooks/useSignIn";
 
 const styles = StyleSheet.create({
   input_container: {
@@ -40,19 +41,25 @@ const validationSchema = yup.object().shape({
 });
 
 const SignIn = () => {
+  const [signIn] = useSignIn();
+  const onSubmit = async (values) => {
+    // console.log(values);
+    const { username, password } = values;
+    try {
+      const { data } = await signIn({ username, password });
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
     },
     // not sure what is resetForm but it doesn't remove all form data
-    onSubmit: (values, { resetForm }) => {
-      if (!formik.isValid) {
-        return;
-      }
-      console.log(values);
-      resetForm();
-    },
+    onSubmit: onSubmit,
     validationSchema: validationSchema,
   });
 
