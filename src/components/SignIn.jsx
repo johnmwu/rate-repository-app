@@ -41,26 +41,14 @@ const validationSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-const SignIn = () => {
-  const [signIn] = useSignIn();
-  const navigate = useNavigate();
+export const SignInContainer = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
     },
-    // not sure what is resetForm but it doesn't remove all form data
-    onSubmit: async (values) => {
-      // console.log(values);
-      const { username, password } = values;
-      try {
-        await signIn({ username, password });
-        navigate("/");
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    validationSchema: validationSchema,
+    onSubmit,
+    validationSchema,
   });
 
   return (
@@ -117,6 +105,23 @@ const SignIn = () => {
       </Pressable>
     </View>
   );
+};
+
+const SignIn = () => {
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
+  const onSubmit = async (values) => {
+    // console.log(values);
+    const { username, password } = values;
+    try {
+      await signIn({ username, password });
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return <SignInContainer onSubmit={onSubmit} />;
 };
 
 export default SignIn;

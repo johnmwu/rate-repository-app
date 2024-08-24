@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({ repository }) => {
   return (
-    <View style={styles.item_container}>
+    <View style={styles.item_container} testID="repositoryItem">
       <View
         style={{
           display: "flex",

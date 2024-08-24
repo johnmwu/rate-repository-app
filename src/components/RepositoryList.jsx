@@ -1,8 +1,6 @@
 import { FlatList, View, StyleSheet } from "react-native";
 import RepositoryItem from "./RepositoryItem/index"; // idk why index is necessary but it was for expo
 import theme from "../theme";
-import { useQuery } from "@apollo/client";
-import { GET_REPOSITORIES } from "../graphql/queries";
 import useRepositories from "../hooks/useRepositories";
 
 const styles = StyleSheet.create({
@@ -14,9 +12,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = () => {
-  const { repositories } = useRepositories();
-
+export const RepositoryListContainer = ({ repositories }) => {
   // Get the nodes from the edges array
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -31,6 +27,12 @@ const RepositoryList = () => {
       renderItem={({ item }) => <RepositoryItem repository={item} />}
     />
   );
+};
+
+const RepositoryList = () => {
+  const { repositories } = useRepositories();
+
+  return <RepositoryListContainer repositories={repositories} />;
 };
 
 export default RepositoryList;
