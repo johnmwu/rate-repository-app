@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import theme from "../theme";
 import Text from "./Text";
 import useSignIn from "../hooks/useSignIn";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   input_container: {
@@ -42,24 +43,23 @@ const validationSchema = yup.object().shape({
 
 const SignIn = () => {
   const [signIn] = useSignIn();
-  const onSubmit = async (values) => {
-    // console.log(values);
-    const { username, password } = values;
-    try {
-      const { data } = await signIn({ username, password });
-      console.log(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
     },
     // not sure what is resetForm but it doesn't remove all form data
-    onSubmit: onSubmit,
+    onSubmit: async (values) => {
+      // console.log(values);
+      const { username, password } = values;
+      try {
+        await signIn({ username, password });
+        navigate("/");
+      } catch (e) {
+        console.log(e);
+      }
+    },
     validationSchema: validationSchema,
   });
 

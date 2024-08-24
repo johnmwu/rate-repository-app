@@ -11,6 +11,7 @@ const theme = {
     backgroundDark: "#24292e",
     backgroundWhite: "#ffffff",
     backgroundGray: "#e1e4e8",
+    backgroundRed: "#d73a4a",
   },
   fontSizes: {
     body: 14,

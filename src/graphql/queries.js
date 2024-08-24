@@ -20,10 +20,11 @@ export const GET_REPOSITORIES = gql`
   }
 `;
 
-export const LOGIN = gql`
-  mutation ($credentials: AuthenticateInput) {
-    authenticate(credentials: $credentials) {
-      accessToken
+export const GET_ME = gql`
+  query {
+    me {
+      id
+      username
     }
   }
 `;
