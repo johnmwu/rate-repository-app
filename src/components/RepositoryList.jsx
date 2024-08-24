@@ -3,6 +3,7 @@ import RepositoryItem from "./RepositoryItem/index"; // idk why index is necessa
 import theme from "../theme";
 import { useQuery } from "@apollo/client";
 import { GET_REPOSITORIES } from "../graphql/queries";
+import useRepositories from "../hooks/useRepositories";
 
 const styles = StyleSheet.create({
   separator: {
@@ -14,20 +15,7 @@ const styles = StyleSheet.create({
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
-  const { data, error, loading } = useQuery(GET_REPOSITORIES, {
-    fetchPolicy: "cache-and-network",
-  });
-
-  if (error) {
-    console.log(error);
-    return null;
-  }
-
-  if (loading) {
-    return null;
-  }
-
-  const repositories = data.repositories;
+  const { repositories } = useRepositories();
 
   // Get the nodes from the edges array
   const repositoryNodes = repositories
