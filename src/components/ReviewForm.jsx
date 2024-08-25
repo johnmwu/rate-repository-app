@@ -1,8 +1,5 @@
-import { View, TextInput, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useFormik } from "formik";
-import theme from "../theme";
-import Text from "./Text";
-import useSignIn from "../hooks/useSignIn";
 import { useNavigate } from "react-router-native";
 import { PrimaryButton } from "./buttons";
 import InputField from "./InputField";

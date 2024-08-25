@@ -30,6 +30,7 @@ const AppBar = () => {
           <AppBarTab text="Sign In" route="/signin" />
         )}
         {isSignedIn && <AppBarTab text="Review" route="/review" />}
+        {!isSignedIn && <AppBarTab text="Sign Up" route="/signup" />}
         <AppBarTab text="Test" route="/test" />
       </ScrollView>
     </View>
