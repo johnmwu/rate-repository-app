@@ -18,16 +18,18 @@ const AppBar = () => {
   // determine if signed in
   const { loading, error, data } = useQuery(GET_ME);
   const username = !loading && !error && data.me;
+  const isSignedIn = !!username;
 
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab text="Repositories" route="/" />
-        {username ? (
+        {isSignedIn ? (
           <AppBarTab text="Sign Out" route="/signout" />
         ) : (
           <AppBarTab text="Sign In" route="/signin" />
         )}
+        {isSignedIn && <AppBarTab text="Review" route="/review" />}
         <AppBarTab text="Test" route="/test" />
       </ScrollView>
     </View>
