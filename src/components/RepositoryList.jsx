@@ -1,7 +1,8 @@
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet, Pressable } from "react-native";
 import RepositoryItem from "./RepositoryItem/index"; // idk why index is necessary but it was for expo
 import theme from "../theme";
 import useRepositories from "../hooks/useRepositories";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   separator: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, navigate }) => {
   // Get the nodes from the edges array
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -24,15 +25,22 @@ export const RepositoryListContainer = ({ repositories }) => {
       ItemSeparatorComponent={ItemSeparator}
       // other props
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <RepositoryItem repository={item} />}
+      renderItem={({ item }) => (
+        <Pressable onPress={() => navigate(`/repository/${item.id}`)}>
+          <RepositoryItem repository={item} showLink={false} />
+        </Pressable>
+      )}
     />
   );
 };
 
 const RepositoryList = () => {
   const { repositories } = useRepositories();
+  const navigate = useNavigate();
 
-  return <RepositoryListContainer repositories={repositories} />;
+  return (
+    <RepositoryListContainer repositories={repositories} navigate={navigate} />
+  );
 };
 
 export default RepositoryList;

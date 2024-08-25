@@ -1,7 +1,8 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Linking } from "react-native";
 import Text from "../../components/Text";
 import theme from "../../theme";
 import ItemStat from "./ItemStat";
+import { PrimaryButton } from "../buttons";
 
 const styles = StyleSheet.create({
   item_logo: {
@@ -19,7 +20,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryItem = ({ repository }) => {
+const RepositoryItem = ({ repository, showLink }) => {
+  if (!repository) {
+    return null;
+  }
+
   return (
     <View style={styles.item_container} testID="repositoryItem">
       <View
@@ -90,6 +95,16 @@ const RepositoryItem = ({ repository }) => {
         <ItemStat label="Reviews" value={repository.reviewCount} />
         <ItemStat label="Rating" value={repository.ratingAverage} />
       </View>
+
+      {/* maybe show link to github */}
+      {showLink && (
+        <View style={{ marginTop: 10 }}>
+          <PrimaryButton
+            text="Open in Github"
+            onPress={() => Linking.openURL(repository.url)}
+          />
+        </View>
+      )}
     </View>
   );
 };

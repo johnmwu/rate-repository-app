@@ -1,9 +1,10 @@
-import { View, TextInput, StyleSheet, Pressable } from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 import { useFormik } from "formik";
 import theme from "../theme";
 import Text from "./Text";
 import useSignIn from "../hooks/useSignIn";
 import { useNavigate } from "react-router-native";
+import { PrimaryButton } from "./buttons";
 
 const styles = StyleSheet.create({
   input_container: {
@@ -23,13 +24,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: theme.colors.backgroundGray,
     borderStyle: "solid",
-    borderRadius: 5,
-  },
-  submit_button: {
-    margin: 5,
-    padding: 10,
-
-    backgroundColor: theme.colors.primary,
     borderRadius: 5,
   },
 });
@@ -92,17 +86,7 @@ export const SignInContainer = ({ onSubmit }) => {
         )}
       </View>
 
-      <Pressable style={styles.submit_button} onPress={formik.handleSubmit}>
-        <Text
-          style={{
-            color: theme.colors.textLight,
-            fontWeight: theme.fontWeights.bold,
-            textAlign: "center",
-          }}
-        >
-          Sign In
-        </Text>
-      </Pressable>
+      <PrimaryButton text="Sign In" onPress={formik.handleSubmit} />
     </View>
   );
 };

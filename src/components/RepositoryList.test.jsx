@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from "@testing-library/react-native";
+import { render, screen } from "@testing-library/react-native";
 
 import { RepositoryListContainer } from "./RepositoryList";
 describe("RepositoryList", () => {
