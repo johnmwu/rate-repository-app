@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-native";
-import { PrimaryButton } from "./buttons";
+import { Button } from "./buttons";
 import InputField from "./InputField";
 import useCreateReview from "../hooks/useCreateReview";
 
@@ -67,7 +67,7 @@ const ReviewForm = () => {
       />
       <InputField placeholder="Review" field="text" formik={formik} multiline />
 
-      <PrimaryButton text="Create a review" onPress={formik.handleSubmit} />
+      <Button text="Create a review" onPress={formik.handleSubmit} />
     </View>
   );
 };

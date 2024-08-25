@@ -29,3 +29,9 @@ export const SIGNUP = gql`
     }
   }
 `;
+
+export const DELETE_REVIEW = gql`
+  mutation ($deleteReviewId: ID!) {
+    deleteReview(id: $deleteReviewId)
+  }
+`;

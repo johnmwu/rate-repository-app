@@ -3,9 +3,7 @@ import { useParams } from "react-router-native";
 import useRepository from "../hooks/useRepository";
 import RepositoryItem from "./RepositoryItem";
 import { FlatList, View, StyleSheet } from "react-native";
-import Text from "./Text";
 import theme from "../theme";
-import format from "date-fns/format";
 import ReviewItem from "./ReviewItem";
 
 const styles = StyleSheet.create({

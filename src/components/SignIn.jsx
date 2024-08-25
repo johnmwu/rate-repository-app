@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { useFormik } from "formik";
 import useSignIn from "../hooks/useSignIn";
 import { useNavigate } from "react-router-native";
-import { PrimaryButton } from "./buttons";
+import { Button } from "./buttons";
 import InputField from "./InputField";
 import styles from "../styles";
 
@@ -39,7 +39,7 @@ export const SignInContainer = ({ onSubmit }) => {
         secureTextEntry={true}
       />
 
-      <PrimaryButton text="Sign In" onPress={formik.handleSubmit} />
+      <Button text="Sign In" onPress={formik.handleSubmit} />
     </View>
   );
 };

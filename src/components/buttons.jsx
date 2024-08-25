@@ -10,11 +10,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export const PrimaryButton = ({ text, onPress }) => {
+export const Button = ({ text, backgroundColor, onPress }) => {
   return (
     <Pressable
       onPress={onPress}
-      style={{ ...styles.button, backgroundColor: theme.colors.primary }}
+      style={{
+        ...styles.button,
+        backgroundColor: backgroundColor || theme.colors.primary,
+        flexGrow: 1,
+        flexShrink: 1,
+      }}
     >
       <Text
         style={{

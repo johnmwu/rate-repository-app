@@ -4,6 +4,7 @@ import { View, FlatList } from "react-native";
 import ReviewItem from "./ReviewItem";
 import theme from "../theme";
 import { StyleSheet } from "react-native";
+import Text from "./Text";
 
 const styles = StyleSheet.create({
   separator: {
@@ -23,15 +24,15 @@ const MyReviews = () => {
   });
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Text>Loading...</Text>;
   }
 
   if (error) {
-    return <p>Error :( {error.message}</p>;
+    return <Text>Error :( {error.message}</Text>;
   }
 
   if (!data) {
-    return <p>No data :(</p>;
+    return <Text>No data :(</Text>;
   }
 
   const reviews = data.me.reviews.edges.map((edge) => edge.node);

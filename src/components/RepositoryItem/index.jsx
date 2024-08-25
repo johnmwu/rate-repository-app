@@ -2,7 +2,7 @@ import { View, Image, StyleSheet, Linking } from "react-native";
 import Text from "../../components/Text";
 import theme from "../../theme";
 import ItemStat from "./ItemStat";
-import { PrimaryButton } from "../buttons";
+import { Button } from "../buttons";
 
 const styles = StyleSheet.create({
   item_logo: {
@@ -99,7 +99,7 @@ const RepositoryItem = ({ repository, showLink }) => {
       {/* maybe show link to github */}
       {showLink && (
         <View style={{ marginTop: 10 }}>
-          <PrimaryButton
+          <Button
             text="Open in Github"
             onPress={() => Linking.openURL(repository.url)}
           />
