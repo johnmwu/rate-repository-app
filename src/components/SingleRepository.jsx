@@ -5,6 +5,7 @@ import RepositoryItem from "./RepositoryItem";
 import { FlatList, View, StyleSheet } from "react-native";
 import theme from "../theme";
 import ReviewItem from "./ReviewItem";
+import Text from "./Text";
 
 const styles = StyleSheet.create({
   separator: {
@@ -15,14 +16,22 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-// format is either "myreview" or "reviews"
-
 const SingleRepository = () => {
   const id = useParams().id;
-  const { repository } = useRepository(id);
+  const { repository, fetchMore, loading } = useRepository({
+    id,
+    first: 3,
+  });
+  const onEndReach = () => {
+    fetchMore();
+  };
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
 
   if (!repository) {
-    return null;
+    return <Text>No data :(</Text>;
   }
 
   const reviews = repository.reviews.edges.map((edge) => edge.node);
@@ -40,6 +49,10 @@ const SingleRepository = () => {
             <ItemSeparator />
           </View>
         )}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
+        // android stuff gets cut off at the end
+        contentContainerStyle={{ paddingBottom: 100 }}
       />
     </View>
   );

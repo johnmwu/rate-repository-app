@@ -45,6 +45,7 @@ const SortPicker = ({ setOrderBy, setOrderDirection }) => {
 
 export const RepositoryListContainer = ({
   repositories,
+  onEndReach,
   navigate,
   picker,
   searchBar,
@@ -71,6 +72,8 @@ export const RepositoryListContainer = ({
           <RepositoryItem repository={item} showLink={false} />
         </Pressable>
       )}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
@@ -90,12 +93,16 @@ const RepositoryList = () => {
   const [orderDirection, setOrderDirection] = useState("DESC");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [debouncedKeyword] = useDebounce(searchKeyword, 500);
-  const { repositories } = useRepositories({
+  const { repositories, fetchMore } = useRepositories({
     orderBy,
     orderDirection,
     searchKeyword: debouncedKeyword,
+    first: 8,
   });
   const navigate = useNavigate();
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <View>
@@ -105,6 +112,7 @@ const RepositoryList = () => {
       /> */}
       <RepositoryListContainer
         repositories={repositories}
+        onEndReach={onEndReach}
         navigate={navigate}
         picker={
           <SortPicker
